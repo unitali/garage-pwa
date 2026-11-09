@@ -38,16 +38,16 @@ export default defineConfig({
         scope: '/',
         display: 'standalone',
         orientation: 'portrait',
-        theme_color: '#ea580c',
+        theme_color: '#334155',
         background_color: '#ffffff', // tela de abertura do app instalado: logo sobre branco
         // ícones gerados por `npm run icons` (scripts/icons.mjs): "any" com os cantos arredondados do desenho;
         // "maskable" com fundo inteiro e o carro menor, para o Android recortar no formato dele.
         // No iPhone vale o apple-touch-icon (index.html), que o próprio iOS arredonda.
-        // ?v=orange: força o navegador a buscar os ícones novos (a troca do azul para o laranja)
+        // ?v=slate: força o navegador a buscar os ícones novos (troque o valor sempre que mudar os ícones)
         icons: [
-          { src: '/icons/icon-192.png?v=orange', sizes: '192x192', type: 'image/png', purpose: 'any' },
-          { src: '/icons/icon-512.png?v=orange', sizes: '512x512', type: 'image/png', purpose: 'any' },
-          { src: '/icons/maskable-512.png?v=orange', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+          { src: '/icons/icon-192.png?v=slate', sizes: '192x192', type: 'image/png', purpose: 'any' },
+          { src: '/icons/icon-512.png?v=slate', sizes: '512x512', type: 'image/png', purpose: 'any' },
+          { src: '/icons/maskable-512.png?v=slate', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
         ],
       },
       workbox: {
