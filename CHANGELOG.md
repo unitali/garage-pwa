@@ -2,6 +2,12 @@
 
 Todas as versões do Unitali Garage, geradas a partir dos commits.
 
+## [0.6.5](https://github.com/unitali/garage-pwa/compare/v0.6.4...v0.6.5) (2026-11-09)
+
+### 🐛 Correções
+
+- icons and colors ([5fc55d2](https://github.com/unitali/garage-pwa/commit/5fc55d25e8a2ef2e6ee34ebce0e05f3832f166c3))
+
 ## [0.6.4](https://github.com/unitali/garage-pwa/compare/v0.6.3...v0.6.4) (2026-11-09)
 
 ### 🐛 Correções
