@@ -2,6 +2,16 @@
 
 Todas as versões do Unitali Garage, geradas a partir dos commits.
 
+## [0.6.4](https://github.com/unitali/garage-pwa/compare/v0.6.3...v0.6.4) (2026-11-09)
+
+### 🐛 Correções
+
+- update icons and version ([3ee89ed](https://github.com/unitali/garage-pwa/commit/3ee89eda682336511334dce9bc284f61c67f0b10))
+
+### 🔧 Manutenção
+
+- tira os .DS_Store do repositório e ignora daqui em diante ([cb50fe9](https://github.com/unitali/garage-pwa/commit/cb50fe9ba65a33c31e8501dc253b260225428cd9))
+
 ## [0.6.3](https://github.com/unitali/garage/compare/v0.6.2...v0.6.3) (2026-11-04)
 
 ### 🐛 Correções
