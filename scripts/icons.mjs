@@ -1,51 +1,42 @@
-// Gera o logo (src/assets/logo.svg) e os ícones PNG do PWA a partir do desenho abaixo.
+// Gera o logo (src/assets/logo.png) e os ícones PNG do PWA.
 // Uso: npm run icons   (precisa do rsvg-convert: `brew install librsvg`)
+//
+// O desenho (carro de frente + chave de boca, em branco) está em scripts/icon-glyph.png, recortado do
+// ícone original de 1254px. Aqui ele é posto sobre o fundo azul da marca (#0168FA) em cada formato.
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+
+const glyph = `data:image/png;base64,${readFileSync(new URL('./icon-glyph.png', import.meta.url)).toString('base64')}`;
 
 /**
- * Carro branco de frente, com a chave de boca na grade e os faróis verde e vermelho (cores da Unitali),
- * no fundo cinza-azulado (#334155). `scale` encolhe o desenho (ícone maskable).
+ * O desenho na mesma posição do ícone original (x 250, y 365, 811×522 de 1254px), em coordenadas de 512.
+ * `scale` encolhe em torno do centro (ícone maskable, que o Android recorta em círculo).
  */
+const k = 512 / 1254;
+const glyphImage = `<image href="${glyph}" x="${250 * k}" y="${365 * k}" width="${811 * k}" height="${522 * k}"/>`;
+
 function art(scale = 1) {
   const t = scale === 1 ? '' : ` transform="translate(${256 * (1 - scale)} ${256 * (1 - scale)}) scale(${scale})"`;
-  return `
-  <g${t}>
-    <rect x="112" y="340" width="68" height="74" rx="20" fill="#0f172a"/>
-    <rect x="332" y="340" width="68" height="74" rx="20" fill="#0f172a"/>
-    <rect x="62" y="206" width="64" height="34" rx="14" fill="#ffffff"/>
-    <rect x="386" y="206" width="64" height="34" rx="14" fill="#ffffff"/>
-    <path d="M172 116 H340 Q368 116 378 142 L412 236 H100 L134 142 Q144 116 172 116 Z" fill="#ffffff"/>
-    <path d="M184 144 H328 Q342 144 347 157 L370 222 H142 L165 157 Q170 144 184 144 Z" fill="#e2e8f0"/>
-    <rect x="80" y="218" width="352" height="154" rx="48" fill="#ffffff"/>
-    <rect x="108" y="254" width="84" height="38" rx="19" fill="#009247"/>
-    <rect x="320" y="254" width="84" height="38" rx="19" fill="#cf2b36"/>
-    <rect x="188" y="298" width="136" height="54" rx="18" fill="#334155"/>
-    <g transform="rotate(-30 256 325)">
-      <rect x="212" y="318" width="64" height="14" rx="7" fill="#ffffff"/>
-      <circle cx="282" cy="325" r="18" fill="#ffffff"/>
-      <rect x="284" y="318" width="20" height="14" fill="#334155"/>
-    </g>
-  </g>`;
+  return `<g${t}>${glyphImage}</g>`;
 }
 
-const defs = `<defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#475569"/><stop offset="1" stop-color="#1e293b"/></linearGradient></defs>`;
+// azul da marca em cima, um pouco mais escuro embaixo (como no ícone original)
+const defs = `<defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0168fa"/><stop offset="1" stop-color="#0050d9"/></linearGradient></defs>`;
 
 /** cantos arredondados (fora deles, transparente): favicon, logo e ícone "any" */
 const rounded = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">${defs}<rect width="512" height="512" rx="112" fill="url(#bg)"/>${art()}</svg>`;
 /** quadrado inteiro: o sistema recorta (iOS arredonda; Android aplica a máscara) */
 const square = (scale) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">${defs}<rect width="512" height="512" fill="url(#bg)"/>${art(scale)}</svg>`;
-
 const tmp = new URL('../node_modules/.icons/', import.meta.url);
 mkdirSync(tmp, { recursive: true });
 mkdirSync(new URL('../public/icons/', import.meta.url), { recursive: true });
-writeFileSync(new URL('../src/assets/logo.svg', import.meta.url), rounded);
 
-const sources = { rounded, apple: square(0.9), maskable: square(0.78) };
+const sources = { rounded, apple: square(1), maskable: square(0.86) };
 for (const [name, svg] of Object.entries(sources)) writeFileSync(new URL(`${name}.svg`, tmp), svg);
 
 const out = [
-  ['rounded', 64, 'public/favicon.png'],
+  // logo do app (cabeçalho e login): até 96px na tela, ×3 para telas de alta densidade
+  ['rounded', 288, 'src/assets/logo.png'],  ['rounded', 64, 'public/favicon.png'],
   ['rounded', 192, 'public/icons/icon-192.png'],
   ['rounded', 512, 'public/icons/icon-512.png'],
   ['maskable', 512, 'public/icons/maskable-512.png'],
