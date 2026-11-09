@@ -38,18 +38,20 @@ export default defineConfig({
         scope: '/',
         display: 'standalone',
         orientation: 'portrait',
-        theme_color: '#0f2747',
+        theme_color: '#ea580c',
         background_color: '#ffffff', // tela de abertura do app instalado: logo sobre branco
-        // ícone do app instalado: o logo.png inteiro, com os cantos arredondados do desenho (transparentes fora).
-        // Sem ícone "maskable" de propósito: o Android cortaria o logo em círculo (as pontas verde e vermelha).
+        // ícones gerados por `npm run icons` (scripts/icons.mjs): "any" com os cantos arredondados do desenho;
+        // "maskable" com fundo inteiro e o carro menor, para o Android recortar no formato dele.
         // No iPhone vale o apple-touch-icon (index.html), que o próprio iOS arredonda.
+        // ?v=orange: força o navegador a buscar os ícones novos (a troca do azul para o laranja)
         icons: [
-          { src: '/icons/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
-          { src: '/icons/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+          { src: '/icons/icon-192.png?v=orange', sizes: '192x192', type: 'image/png', purpose: 'any' },
+          { src: '/icons/icon-512.png?v=orange', sizes: '512x512', type: 'image/png', purpose: 'any' },
+          { src: '/icons/maskable-512.png?v=orange', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
         ],
       },
       workbox: {
-        // inclui o logo (src/assets/logo.png) e a fonte Inter para aparecerem também offline
+        // inclui o logo (src/assets/logo.svg) e a fonte Inter para aparecerem também offline
         globPatterns: ['**/*.{js,css,html,png,svg,ico,woff2}'],
         // da Inter só o latim (português); os outros alfabetos ficam fora do cache
         globIgnores: ['**/inter-{cyrillic,cyrillic-ext,greek,greek-ext,vietnamese}-*.woff2'],

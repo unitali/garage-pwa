@@ -6,7 +6,7 @@ import { login } from '../auth';
 import { touchDevice, useInstall, useJustInstalled } from '../pwa';
 import { btn, card, error as errorText } from '../ui';
 import FlagStripe from '../components/FlagStripe';
-import logoUrl from '../assets/logo.png';
+import logoUrl from '../assets/logo.svg';
 
 const IGNORED = ['auth/popup-closed-by-user', 'auth/cancelled-popup-request'];
 
