@@ -12,14 +12,15 @@
 
 /* cores da marca; no modo escuro só estes valores mudam */
 :root {
-  /* laranja do logo (#EA580C = orange-600 do Tailwind) */
-  --primary: #ea580c;
-  --primary-600: var(--color-orange-700);
+  /* cinza-azulado do logo (#334155 = slate-700 do Tailwind) */
+  --primary: #334155;
+  --primary-600: var(--color-slate-800);
   --on-primary: var(--color-white);
-  --primary-soft: var(--color-orange-50);
+  /* slate-100, não 50: o 50 some no fundo branco dos cartões */
+  --primary-soft: var(--color-slate-100);
 
-  /* barra do topo (laranja da marca; no modo escuro, um laranja bem escuro) */
-  --bar: #ea580c;
+  /* barra do topo (cor da marca; no modo escuro, um cinza-azulado bem escuro) */
+  --bar: #334155;
   --bar-ink: var(--color-white);
 
   /* faixa tricolor (cores da bandeira italiana) */
@@ -30,13 +31,14 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* um laranja claro, para ter contraste no fundo escuro */
-    --primary: var(--color-orange-400);
-    --primary-600: var(--color-orange-300);
-    --on-primary: var(--color-orange-950);
-    --primary-soft: var(--color-orange-950);
+    /* um cinza-azulado claro, para ter contraste no fundo escuro */
+    --primary: var(--color-slate-300);
+    --primary-600: var(--color-slate-200);
+    --on-primary: var(--color-slate-950);
+    /* slate-800, não 950: o 950 some no fundo slate-900 dos cartões */
+    --primary-soft: var(--color-slate-800);
 
-    --bar: #431407;
+    --bar: #0f172a;
 
     --flag-green: #2fbf71;
     --flag-red: #ef5a63;
