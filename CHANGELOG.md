@@ -2,6 +2,12 @@
 
 Todas as versões do Unitali Garage, geradas a partir dos commits.
 
+## [0.6.6](https://github.com/unitali/garage-pwa/compare/v0.6.5...v0.6.6) (2026-11-11)
+
+### 🔧 Manutenção
+
+- bump actions/checkout from 4.4.0 to 7.0.1 ([555a384](https://github.com/unitali/garage-pwa/commit/555a38413d2733d3cadc9dd2222ed253276c3956))
+
 ## [0.6.5](https://github.com/unitali/garage-pwa/compare/v0.6.4...v0.6.5) (2026-11-09)
 
 ### 🐛 Correções
